@@ -178,7 +178,14 @@ tty.reset = function() {
 
   tty.windows = [];
   tty.terms = {};
-
+  var win = new tty.Window();
+  // hides window until ready
+  win.element.classList.add('creating');
+  // fixes window being 10 pixels up off screen
+  setTimeout(function () {
+    win.maximize();
+    win.element.classList.remove('creating');
+  }, 100);
   tty.emit('reset');
 };
 
